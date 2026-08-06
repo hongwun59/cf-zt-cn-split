@@ -92,13 +92,13 @@ def update_split_tunnels(cidrs, domains):
 
     resp = requests.put(url, json=routes, headers=HEADERS)
 
-if resp.status_code in (200, 204):
-    print(f"✅ 同步成功！{len(routes)} 条路由 | Mode: {MODE}")
-else:
-    print(f"❌ 失败 {resp.status_code}: Cloudflare API 请求未成功")
-    print("详细错误信息：")
-    print(resp.text)
-    resp.raise_for_status()
+    if resp.status_code in (200, 204):
+        print(f"✅ 同步成功！{len(routes)} 条路由 | Mode: {MODE}")
+    else:
+        print(f"❌ 失败 {resp.status_code}: Cloudflare API 请求未成功")
+        print("详细错误信息：")
+        print(resp.text)
+        resp.raise_for_status()
 
 
 if __name__ == "__main__":
